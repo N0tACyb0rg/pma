@@ -1,0 +1,13 @@
+services:
+  pma:
+    build:
+      context: .
+      dockerfile: Containerfile
+    ports:
+      - 8080:8080
+  cloudflared:
+    image: cloudflare/cloudflared:2025.11.1
+    entrypoint: cloudflared tunnel --url pma:8080 --metrics 0.0.0.0:45678
+    ports:
+      - 45678:45678
+
