@@ -2,8 +2,8 @@ from fastapi import FastAPI, Request
 
 app = FastAPI()
 
-@app.post('/pf_authen')
-async def get_authen(request: Request):
+@app.post('/Start')
+async def start_auth(request: Request):
     body = await request.body()
 
     try:
@@ -14,17 +14,9 @@ async def get_authen(request: Request):
 
     print("Headers:", request.headers)
 
-    return {"result": 1, "message": "Successfully sent authorization request"}
+    return {"result": ["OK"]}
 
-@app.post('/pf_author')
-async def get_author(request: Request):
-    body = await request.body()
-    try:
-        json_data = request.json()
-        print("Auth JSON:", json_data)
-    except Exception:
-        print("Raw Request:", body)
+@app.post('/Stop')
+async def stop_dummy():
+    return {"result": ["OK"]}
 
-    print("Headers:", request.headers)
-
-    return {"access_duration":"1H","access_level":"guest","sponsor":1 ,"unregdate":"2030-01-01","category":"default"}
